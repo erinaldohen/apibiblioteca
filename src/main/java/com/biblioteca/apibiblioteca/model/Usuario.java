@@ -20,6 +20,7 @@ public class Usuario implements Serializable{
     private String nome;
     @Column(nullable = false)
     private String login;
+    @Column(nullable = false)
     private String senha;
     
     public Usuario() {

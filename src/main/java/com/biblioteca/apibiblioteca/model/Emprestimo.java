@@ -1,7 +1,6 @@
 package com.biblioteca.apibiblioteca.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.UUID;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,8 +16,8 @@ public class Emprestimo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private LocalDateTime dataDoEmprestimo;
-    private LocalDateTime dataDaEntrega;
+    private String dataDoEmprestimo;
+    private String dataDaEntrega;
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
@@ -32,7 +31,7 @@ public class Emprestimo implements Serializable {
     public Emprestimo() {
     }
 
-    public Emprestimo(LocalDateTime dataDoEmprestimo, LocalDateTime dataDaEntrega, Usuario usuario, Livro livro,
+    public Emprestimo(String dataDoEmprestimo, String dataDaEntrega, Usuario usuario, Livro livro,
             Estudante estudante) {
         this.dataDoEmprestimo = dataDoEmprestimo;
         this.dataDaEntrega = dataDaEntrega;
@@ -49,19 +48,19 @@ public class Emprestimo implements Serializable {
         this.id = id;
     }
 
-    public LocalDateTime getDataDoEmprestimo() {
+    public String getDataDoEmprestimo() {
         return dataDoEmprestimo;
     }
 
-    public void setDataDoEmprestimo(LocalDateTime dataDoEmprestimo) {
+    public void setDataDoEmprestimo(String dataDoEmprestimo) {
         this.dataDoEmprestimo = dataDoEmprestimo;
     }
 
-    public LocalDateTime getDataDaEntrega() {
+    public String getDataDaEntrega() {
         return dataDaEntrega;
     }
 
-    public void setDataDaEntrega(LocalDateTime dataDaEntrega) {
+    public void setDataDaEntrega(String dataDaEntrega) {
         this.dataDaEntrega = dataDaEntrega;
     }
 
