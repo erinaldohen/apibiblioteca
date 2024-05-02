@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.biblioteca.apibiblioteca.dto.EmprestimoRecordDto;
+import com.biblioteca.apibiblioteca.dto.EstudanteRecordDto;
 import com.biblioteca.apibiblioteca.model.Emprestimo;
+import com.biblioteca.apibiblioteca.model.Estudante;
 import com.biblioteca.apibiblioteca.repository.EmprestimoRepository;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,6 +41,26 @@ public class EmprestimoController {
     @GetMapping("/emprestimos")
     public ResponseEntity<List<Emprestimo>> consultaEmprestimo(){
         return ResponseEntity.status(HttpStatus.OK).body(emprestimoRepository.findAll());
+    }
+
+    @GetMapping("/emprestimos/{id}")
+    public ResponseEntity<Object> consultaEmprestimoPorId(@PathVariable(name = "id") UUID id){
+        Optional<Emprestimo> uOptional = emprestimoRepository.findById(id);
+        if (uOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Empréstimo não encontrado!");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(uOptional.get());
+    }
+
+    @PutMapping("/emprestimos/{id}")
+    public ResponseEntity<Object> alteraEmprestimo(@PathVariable(name = "id") UUID id, @RequestBody EmprestimoRecordDto emprestimoRecordDto){
+        Optional<Emprestimo> uOptional = emprestimoRepository.findById(id);
+        if (uOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usário não encontrado!");
+        }
+        Emprestimo emprestimo = uOptional.get();
+        BeanUtils.copyProperties(emprestimoRecordDto, emprestimo);
+        return ResponseEntity.status(HttpStatus.OK).body(emprestimoRepository.save(emprestimo));
     }
 
     @DeleteMapping("/emprestimos/{id}")

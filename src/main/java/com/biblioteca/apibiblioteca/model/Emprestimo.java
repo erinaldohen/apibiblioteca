@@ -32,7 +32,7 @@ public class Emprestimo implements Serializable {
     }
 
     public Emprestimo(String dataDoEmprestimo, String dataDaEntrega, Usuario usuario, Livro livro,
-            Estudante estudante) {
+                    Estudante estudante) {
         this.dataDoEmprestimo = dataDoEmprestimo;
         this.dataDaEntrega = dataDaEntrega;
         this.usuario = usuario;

@@ -1,9 +1,11 @@
 package com.biblioteca.apibiblioteca.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Estudante implements Serializable {
@@ -14,6 +16,8 @@ public class Estudante implements Serializable {
     private String nome;
     private String email;
     private String senha;
+    @OneToMany(mappedBy = "estudante")
+    private List<Emprestimo> emprestimos;
 
     public Estudante(){
         // Construtor vazio
