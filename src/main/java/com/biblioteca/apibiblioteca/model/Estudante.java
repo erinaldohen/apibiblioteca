@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -16,7 +17,7 @@ public class Estudante implements Serializable {
     private String nome;
     private String email;
     private String senha;
-    @OneToMany(mappedBy = "estudante")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "estudante") // mappedBy é o lado não proprietário da relação
     private List<Emprestimo> emprestimos;
 
     public Estudante(){
