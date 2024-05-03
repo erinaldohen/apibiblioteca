@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.biblioteca.apibiblioteca.dto.EmprestimoRecordDto;
-import com.biblioteca.apibiblioteca.dto.EstudanteRecordDto;
 import com.biblioteca.apibiblioteca.model.Emprestimo;
-import com.biblioteca.apibiblioteca.model.Estudante;
 import com.biblioteca.apibiblioteca.repository.EmprestimoRepository;
 
 import org.springframework.web.bind.annotation.DeleteMapping;

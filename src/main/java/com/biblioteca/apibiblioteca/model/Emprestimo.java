@@ -3,6 +3,7 @@ package com.biblioteca.apibiblioteca.model;
 import java.io.Serializable;
 import java.util.UUID;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,7 +25,7 @@ public class Emprestimo implements Serializable {
     @ManyToOne
     @JoinColumn(name = "livro_isbn")
     private Livro livro;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estudante_matricula")
     private Estudante estudante;
    
