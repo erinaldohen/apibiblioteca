@@ -1,8 +1,12 @@
 package com.biblioteca.apibiblioteca.model;
 
 import java.io.Serializable;
+import java.util.List;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Livro implements Serializable {
@@ -13,6 +17,9 @@ public class Livro implements Serializable {
     private String titulo;
     private String autor;
     private String ano;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "livro") // mappedBy é o lado não proprietário da relação
+    private List<Emprestimo> emprestimos;
+
    
     public Livro() {
     }

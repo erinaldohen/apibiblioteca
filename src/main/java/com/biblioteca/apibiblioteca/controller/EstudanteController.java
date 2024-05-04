@@ -24,14 +24,36 @@ import com.biblioteca.apibiblioteca.repository.EstudanteRepository;
 public class EstudanteController {
     @Autowired
     EstudanteRepository estudanteRepository;
+    //@Autowired
+    //PasswordEncoder passwordEncoder;
 
     @PostMapping("/estudantes")
     public ResponseEntity<Estudante> cadastraEstudante(@RequestBody EstudanteRecordDto estudanteRecordDto){
         Estudante estudante = new Estudante();
+        //estudanteRecordDto.senha(passwordEncoder.encode(estudanteRecordDto.senha()));
+        //    passwordEncoder.encode(estudante.getSenha()));
         BeanUtils.copyProperties(estudanteRecordDto, estudante);
         return ResponseEntity.status(HttpStatus.CREATED).body(estudanteRepository.save(estudante));
     }
 
+//    @GetMapping("/validarSenha")
+  //  public ResponseEntity<Boolean> validarSenha(@RequestParam String login,
+    //                                            @RequestParam String password) {
+
+      //  Optional<Estudante> eOptional = estudanteRepository.findById(login);
+        //if (eOptional.isEmpty()) {
+          //  return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login invalido!");
+//        }
+
+   //     Estudante estudante = eOptional.get();
+     //   boolean valid = passwordEncoder.matches(password, estudante.getSenha());
+
+       // HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
+       // return ResponseEntity.status(status).body(valid);
+
+    //}
+
+    
     @GetMapping("/estudantes")
     public ResponseEntity<List<Estudante>> consultaestudantesCadastrados(){
         return ResponseEntity.status(HttpStatus.OK).body(estudanteRepository.findAll());

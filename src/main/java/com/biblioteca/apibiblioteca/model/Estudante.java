@@ -3,19 +3,28 @@ package com.biblioteca.apibiblioteca.model;
 import java.io.Serializable;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Estudante implements Serializable {
     private static final long serialversionUID = 1L;
 
     @Id
+    @NotBlank
     private String matricula;
+    @NotBlank
     private String nome;
+    @NotBlank
+    @Email
+    @Column(unique = true)
     private String email;
+    @NotBlank
     private String senha;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "estudante") // mappedBy é o lado não proprietário da relação
     private List<Emprestimo> emprestimos;

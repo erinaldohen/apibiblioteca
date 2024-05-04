@@ -2,6 +2,7 @@ package com.biblioteca.apibiblioteca.model;
 
 import java.io.Serializable;
 import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Emprestimo implements Serializable {
@@ -17,12 +19,14 @@ public class Emprestimo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @NotBlank
     private String dataDoEmprestimo;
+    @NotBlank
     private String dataDaEntrega;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "livro_isbn")
     private Livro livro;
     @ManyToOne(fetch = FetchType.LAZY)
