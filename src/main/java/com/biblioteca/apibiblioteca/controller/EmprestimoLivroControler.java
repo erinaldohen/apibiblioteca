@@ -10,11 +10,13 @@ import com.biblioteca.apibiblioteca.dto.EmprestimoLivroRecordDto;
 import com.biblioteca.apibiblioteca.model.EmprestimoLivro;
 import com.biblioteca.apibiblioteca.repository.EmprestimoLivroRepository;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
+@CrossOrigin("*")
 public class EmprestimoLivroControler {
     @Autowired
     EmprestimoLivroRepository emprestimoLivroRepository;

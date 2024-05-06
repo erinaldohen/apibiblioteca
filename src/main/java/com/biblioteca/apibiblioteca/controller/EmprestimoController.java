@@ -17,6 +17,7 @@ import com.biblioteca.apibiblioteca.dto.EmprestimoRecordDto;
 import com.biblioteca.apibiblioteca.model.Emprestimo;
 import com.biblioteca.apibiblioteca.repository.EmprestimoRepository;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
+@CrossOrigin("*")
 public class EmprestimoController {
 
     @Autowired

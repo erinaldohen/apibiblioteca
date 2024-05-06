@@ -7,6 +7,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -28,16 +30,30 @@ public class Estudante implements Serializable {
     private String senha;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "estudante") // mappedBy é o lado não proprietário da relação
     private List<Emprestimo> emprestimos;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
 
     public Estudante(){
         // Construtor vazio
     }
 
-    public Estudante(String matricula, String nome, String email, String senha) {
+    public Estudante(@NotBlank String matricula, @NotBlank String nome, @NotBlank @Email String email,
+            @NotBlank String senha, Endereco endereco) {
         this.matricula = matricula;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.endereco = endereco;
+    }
+
+    public Estudante(@NotBlank String matricula, @NotBlank String nome, @NotBlank @Email String email,
+            @NotBlank String senha, List<Emprestimo> emprestimos) {
+        this.matricula = matricula;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.emprestimos = emprestimos;
     }
 
     public String getMatricula() {
@@ -72,33 +88,26 @@ public class Estudante implements Serializable {
         this.senha = senha;
     }
 
+    public List<Emprestimo> getEmprestimos() {
+        return emprestimos;
+    }
+
+    public void setEmprestimos(List<Emprestimo> emprestimos) {
+        this.emprestimos = emprestimos;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
     @Override
     public String toString() {
-        return "Estudante [matricula=" + matricula + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
+        return "Estudante [matricula=" + matricula + ", nome=" + nome + ", email=" + email + ", senha=" + senha
+                + ", emprestimos=" + emprestimos + ", endereco=" + endereco + "]";
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Estudante other = (Estudante) obj;
-        if (matricula == null) {
-            if (other.matricula != null)
-                return false;
-        } else if (!matricula.equals(other.matricula))
-            return false;
-        return true;
-    }
 }
